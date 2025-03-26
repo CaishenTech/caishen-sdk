@@ -57,6 +57,7 @@
     "tonweb": "^0.0.66",
     "tronweb": "^6.0.1",
     "tweetnacl": "^1.0.3",
+    "web3": "^4.16.0",
     "zod": "3.x"
   },
   "devDependencies": {
