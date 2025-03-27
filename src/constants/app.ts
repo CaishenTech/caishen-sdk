@@ -15,6 +15,7 @@ export const SUPPORTED_CHAINS = [
 ]
 
 export const BASE_URL = 'https://build.caishen.xyz';
+export const SECRET: any = 'newmoneyai_secret'
 
 export enum ChainType {
   BITCOIN = 'BITCOIN',

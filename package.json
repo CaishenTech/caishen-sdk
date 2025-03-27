@@ -49,6 +49,7 @@
     "bitcoinjs-lib": "^6.1.7",
     "bs58": "^6.0.0",
     "crypto": "^1.0.1",
+    "crypto-js": "^4.2.0",
     "ecpair": "^3.0.0-rc.0",
     "ethers": "^5.7.2",
     "near-api-js": "^5.0.1",
