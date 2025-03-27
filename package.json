@@ -1,6 +1,6 @@
 {
   "name": "caishen-sdk",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "type": "module",
   "description": "The Caishen SDK gives every agent or user access to unlimited multi-chain crypto wallets",
   "main": "./dist/index.cjs",
@@ -62,6 +62,7 @@
     "zod": "3.x"
   },
   "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
     "@types/node": "^22.5.5",
     "terser": "^5.37.0",
     "tsup": "^8.0.2",

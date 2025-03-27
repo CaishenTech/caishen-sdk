@@ -1,5 +1,6 @@
 import CryptoJS from 'crypto-js'
 import { SECRET } from '../constants/app'
+
 export const encrypt = (clear: any) => {
   var cipher: any = CryptoJS.AES.encrypt(clear, SECRET)
   cipher = cipher.toString()
