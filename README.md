@@ -396,7 +396,107 @@ type TokenWithPrice = Token & {
 
 ---
 
+# Vercel AI, Langchain, and ElevenLabs Integration
+
+This project demonstrates the integration of three powerful AI tools: Vercel AI, Langchain, and ElevenLabs, to create intelligent and engaging applications. It showcases how these technologies can be combined to process natural language, orchestrate complex tasks, and generate realistic audio output.
+
+## Overview
+
+This project provides examples of how to:
+
+- **Utilize Vercel AI:** Leverage Vercel AI's `generateText` function with custom tools to interact with external APIs or perform specific actions based on user input.
+- **Employ Langchain:** Use Langchain's agent capabilities and its integration with large language models (LLMs) to create sophisticated workflows involving multiple steps and tool usage.
+- **Integrate ElevenLabs:** Synthesize realistic speech from text using ElevenLabs' API, allowing for voice-based interactions and richer user experiences.
+
+The code snippets provided in this README illustrate fetching data using tools defined for each service and then logging the results.
+
+## Prerequisites
+
+Before running this project, ensure you have the following:
+
+- **Node.js and npm (or yarn) installed:** This project is likely built using JavaScript/TypeScript.
+- **ElevenLabs API Key:** You'll need an API key from your ElevenLabs account to use their text-to-speech service. Set this as an environment variable (e.g., `ELEVENLABS_API_KEY`).
+- **Vercel AI SDK Installed:** Ensure you have the `@vercel/ai` package installed in your project.
+- **Langchain Installed:** Ensure you have the `langchain` and `@langchain/openai` packages installed.
+- **Zod Installed:** You're using `zod` for schema validation (`z`).
+- **`node-fetch` Installed:** If you're making direct API calls, you'll need `node-fetch`.
+
+## Setup
+
+1.  **Clone the repository (if applicable):**
+    ```bash
+    git clone <your-repository-url>
+    cd <your-project-directory>
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
+
+3.  **Set up environment variables:**
+    Create a `.env` file (or configure your environment variables through your hosting provider) and add your ElevenLabs API key:
+    ```
+    ELEVENLABS_API_KEY=your_elevenlabs_api_key
+    ```
+
+## Usage
+
+The provided code snippet demonstrates how to use each of the integrated services:
+
+### ElevenLabs Integration
+
+```javascript
+// /// ================ elevenLabsData =============
+const elevenLabsData = await createElevenLabsTools({sdk})
+const tools = castToToolRecord(elevenLabsData);
+const elevenLabs_input_text = "Hello, please give me the balance of account 15!";
+const elevenLabsData_result = await generateText({
+  model: openai("gpt-4o-mini"),
+  tools: tools,
+  maxSteps: 10,
+  prompt: elevenLabs_input_text,
+});
+console.log("elevenLabs data result text: ", elevenLabsData_result.text);
+```
+
+// /// ================ vercelAIData =============
+```javascript
+const vercelAIData_text = "Hello, please give me the balance of account 15!";
+const vercelAIData = await createVercelAITools({sdk})
+const vercelAIData_result = await generateText({
+  model: openai("gpt-4o-mini"),
+  tools: castToToolRecord(vercelAIData),
+  maxSteps: 10, // Maximum number of tool invocations per request
+  prompt: vercelAIData_text,
+});
+console.log("vercelAIData Result text: ", vercelAIData_result.text);
 ## 🧱 Build from Source
+```
+
+// /// ================ langchainData =============
+```javascript
+const agent_tools = createAgentTools(sdk)
+const langchainData_text = "Fetch my cash balance account 12345";
+const langchainTools = await createLangchainTools({ sdk });
+const llm = new ChatOpenAI({
+  temperature: 0,
+  modelName: "gpt-4o-mini", // or "gpt-3.5-turbo", whatever you're using
+});
+const executor2 = await initializeAgentExecutorWithOptions(
+  agent_tools,
+  llm, // your model (OpenAI, Anthropic, etc)
+  {
+    agentType: "openai-functions",//"zero-shot-react-description",
+    verbose: true,
+  }
+);
+// now you can run
+const res = await executor2.call({ input: langchainData_text });
+console.log("res2 output: ", res.output);
+```
 
 ```bash
 npm install
