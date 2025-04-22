@@ -18,51 +18,6 @@ import { initializeAgentExecutorWithOptions } from "langchain/agents";
   }
 
 describe('Integration: SDK Authorization', function () {
-  // async function execute({ text }) {
-  //   const apiKey = process.env.ELEVENLABS_API_KEY!;
-  //   console.log("apiKey: ", apiKey
-  //   )
-  //   const defaultVoiceId = process.env.ELEVENLABS_VOICE_ID;
-  //   const url = `https://api.elevenlabs.io/v1/text-to-speech/${defaultVoiceId}`;
-
-  //   // const response = await fetch(url, {
-  //   //   method: "POST",
-  //   //   headers: {
-  //   //     "Accept": "audio/mpeg",
-  //   //     "Content-Type": "application/json",
-  //   //     "xi-api-key": apiKey,
-  //   //   },
-  //   //   body: JSON.stringify({
-  //   //     text,
-  //   //     voice_settings: {
-  //   //       stability: 0.7,
-  //   //       similarity_boost: 0.7,
-  //   //     },
-  //   //   }),
-  //   // });
-
-  //   // if (!response.ok) {
-  //   //   const error = await response.text();
-  //   //   throw new Error(`ElevenLabs error: ${error}`);
-  //   // }
-
-  //   // const audioBuffer = await response.arrayBuffer();
-  //   // // Save the audio file
-  //   // await writeFile("output.mp3", Buffer.from(audioBuffer));
-  //   // console.log("✅ Audio file saved as output.mp3!");
-  //   const response = await generateText({
-  //     model: openai('gpt-4o-mini'),
-  //     prompt: 'Fetch balance for user account 789',
-  //     tools: [],
-  //   });
-  //   // await generateText({
-
-  //   // })
-  //   // Return base64 encoded audio
-  //   return {
-  //     audioBase64: Buffer.from(audioBuffer).toString('base64'),
-  //   };
-  // };
   describe('Connect As User', () => {
     const sdk = new CaishenSDK({
       projectKey: env.get('PROJECT_KEY').required().asString(),
@@ -126,60 +81,6 @@ describe('Integration: SDK Authorization', function () {
       // now you can run
       const res = await executor2.call({ input: langchainData_text });
       console.log("res2 output: ", res.output);
-      // const langchainData_text = "Fetch my cash balance account 12345";
-      // const langchainTools = await createLangchainTools({ sdk });
-      // const llm = new ChatOpenAI({
-      //   temperature: 0,
-      //   modelName: "gpt-4o-mini", // or "gpt-3.5-turbo", whatever you're using
-      // });
-      // const executor2 = await initializeAgentExecutorWithOptions(
-      //   langchainTools,
-      //   llm, // your model (OpenAI, Anthropic, etc)
-      //   {
-      //     agentType: "openai-functions",//"zero-shot-react-description",
-      //     verbose: true,
-      //   }
-      // );
-      // // now you can run
-      // const res = await executor2.call({ input: "Fetch my cash balance account 12345" });
-      // console.log("res2 output: ", res.output);
-
-      // const DoubleNumberSchema = z.object({
-      //   number: z.number().describe("The number to double"),
-      // });
-    
-      // // 2. Create tool using Zod schema
-      // const doubleNumberTool = tool(
-      //   async (input) => {
-      //     return `Double of ${input.number} is ${input.number * 2}`;
-      //   },
-      //   {
-      //   name: "double_number",
-      //   description: "Takes a number and returns its double",
-      //   schema: DoubleNumberSchema,
-      // });
-      // // 2. Initialize model
-      // const model = new ChatOpenAI({
-      //   modelName: "gpt-4o-mini",
-      //   temperature: 0,
-      // });
-    
-      // // 3. Initialize agent
-      // const executor = await initializeAgentExecutorWithOptions(
-      //   [doubleNumberTool],
-      //   model,
-      //   {
-      //     // agentType: "zero-shot-react-description",
-      //     agentType: "openai-functions",
-      //     verbose: true,
-      //   }
-      // );
-    
-      // console.log("Agent initialized.");
-    
-      // // 4. Run the agent with a prompt
-      // const result = await executor.invoke({ input: "take number 5" });
-      // console.log(result.output);
     });
   });
 
