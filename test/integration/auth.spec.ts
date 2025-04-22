@@ -3,14 +3,11 @@ import env from 'env-var';
 import * as assert from 'assert';
 
 import { openai } from "@ai-sdk/openai";
-import { z } from "zod";
-import { writeFile } from "fs/promises";
 import { CaishenSDK, createAgentTools } from '../../src';
 import { generateText } from 'ai';
 import { createElevenLabsTools, createLangchainTools, createVercelAITools } from '../../src/adapters'
 import { Tool } from 'ai';
 import { ChatOpenAI } from "@langchain/openai";
-import { AgentExecutor, createStructuredChatAgent } from "langchain/agents";
 import { initializeAgentExecutorWithOptions } from "langchain/agents";
 
   function castToToolRecord(obj: object): Record<string, Tool> {
