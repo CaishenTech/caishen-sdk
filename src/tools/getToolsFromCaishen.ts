@@ -11,7 +11,7 @@ import {
   CryptoSendSchema,
   CryptoSwapSchema,
 } from '../crypto/schema';
-import { toolBase } from './ToolBase';
+import { toolBase } from './core/classes/ToolBase';
 import { ChainType } from '../constants';
 
 export async function getToolsFromCaishen({ sdk }: { sdk: CaishenSDK }) {
