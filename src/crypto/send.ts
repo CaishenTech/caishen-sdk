@@ -49,6 +49,46 @@ export async function send(
   }
 }
 
+export async function sendTxn(
+  this: CaishenSDK,
+  {
+    wallet,
+    payload,
+  }: {
+    wallet: IWalletAccount;
+    payload: {
+      toAddress: string;
+      txData: string;
+    };
+  },
+): Promise<string> {
+  if (!this.userToken && !this.agentToken) {
+    throw new Error('Authentication required. Connect as user or agent first.');
+  }
+
+  try {
+    const authToken = this.userToken || this.agentToken;
+    const url = `${BASE_URL}/api/crypto/send_txn`;
+    const response = await axios.post(
+      url,
+      {
+        wallet,
+        payload,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      },
+    );
+    return response.data;
+  } catch (error: any) {
+    throw new Error(
+      `Failed to send transaction: ${error.response?.data?.message || error.message}`,
+    );
+  }
+}
+
 /*
   if payload?.token is undefined or null, get native token balance.
   Otherise - get token balance
